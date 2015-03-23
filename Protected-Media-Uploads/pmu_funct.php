@@ -78,20 +78,37 @@ function PMU_create_thumbnail_callback() {
     $filePath = $_POST['path'];     
     $fileName = $_POST['name'];   
     
+    ///watching for uppecase extension issues
+    $fileNameFix = pathinfo($filename);  
+    $filename = $fileNameFix['filename'] . '.' .strtolower($fileNameFix['extension']); 
+        
+    
+    $filePathFix = pathinfo($filePath);
+    $filePath =  $filePathFix['dirname'] . '/' . $filePathFix['filename'] . '.' . strtolower($filePathFix['extension']);
+    
+    
     $image = wp_get_image_editor( $filePath );
     if ( ! is_wp_error( $image ) ) {
         $image->resize( 150, 150, true );
-        $image->save( '../wp-content/plugins/s2member-files/thumbmaster-' . $fileName );
-    } 
-    wp_die( $filePath . ' / ' . $fileName );
+        $image->save( '../wp-content/plugins/s2member-files/thumb-' . $fileName );
+    } else
+    {
+        wp_die( '@vv' . $filePath );
+    }
+    wp_die(  '@' . $filePath . ' / ' . $fileName );
 	
 }
 
 function PMU_admin_print_styles() {
-    $handle = 'PMU-css';
+    $handleStyles = 'PMU-css';
     $src = PMU_PLUGIN_URL . '/css/styles.css';
-    wp_register_style($handle, $src);
-    wp_enqueue_style($handle);
+    wp_register_style($handleStyles, $src);
+    wp_enqueue_style($handleStyles);
+    
+    $handleBoot = 'PMU-Bootstrap-css';
+    wp_register_style($handleBoot, '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css');
+    wp_enqueue_style($handleBoot);
+    
 }
 
 function PMU_admin_menu_init_func() {
@@ -114,10 +131,8 @@ function load_PMU_admin_js(){
 }
 
 function enqueue_PMU_admin_js(){
-    //wp_enqueue_script( 'jquery-ui-core' );//not needed now 
-    //wp_enqueue_script( 'jquery-ui-tabs' );//not needed now
-    // Isn't it nice to use dependencies and the already registered core js files?
     wp_enqueue_script( 'PMU-upload-script', PMU_PLUGIN_URL  . '/scripts.js', array( 'jquery' ) );
+    wp_enqueue_script( 'PMU-Bootstrap-script', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js', array('PMU-upload-script' ) );
 }
 
 function PMU_plugin_action_links( $links ) {
