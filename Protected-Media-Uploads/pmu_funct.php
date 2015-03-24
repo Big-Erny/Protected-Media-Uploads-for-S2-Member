@@ -5,9 +5,9 @@ include_once 'PMU_page_content.php';
 //Switch the upload directory from uploads to s2 Member filesystem_method
 //needs path fixes to match different domain and innstalls
 function switch_upload_directories( $param ){
-    $param['basedir'] = '/home/zepd6429/public_html/afiadesign.com/wp-content/plugins/s2member-files';
-    $param['baseurl'] = 'http://afiadesign.com/wp-content/plugins/s2member-files';
-    $param['path'] = ABSPATH . 'wp-content/plugins/' . 's2member-files';
+    $param['basedir'] = WP_PLUGIN_DIR . '/s2member-files';
+    $param['baseurl'] =  WP_PLUGIN_URL. '/s2member-files';
+    $param['path'] = WP_PLUGIN_DIR . 's2member-files';
     $param['url'] = plugin_dir_url() . 's2member-files';
         
     /*error_log("path={$param['path']}");  
