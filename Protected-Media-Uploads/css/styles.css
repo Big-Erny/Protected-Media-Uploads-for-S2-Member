@@ -20,3 +20,20 @@ input[readonly] {
   background-color: white !important;
   cursor: text !important;
 }
+
+#PMU_loader{
+    padding:17px;   
+    display: none;
+}
+
+#PMU_success{
+    display: none;
+}
+
+#PMU_warning{
+    display: none;
+}
+
+.col-md-3 {
+  height: 315px;
+}
