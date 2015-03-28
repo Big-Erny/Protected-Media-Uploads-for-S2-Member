@@ -46,5 +46,4 @@ add_action( 'wp_ajax_nopriv_PMU_create_thumbnail', 'PMU_create_thumbnail_no_priv
 add_action( 'wp_ajax_PMU_Delete', 'PMU_Delete' );
 add_action( 'wp_ajax_nopriv_PMU_Delete', 'PMU_Delete_no_priv' );
 
-PMU_Delete_no_priv
 ?>
